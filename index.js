@@ -20,9 +20,14 @@ const posts = _.map(_.range(10), (idx) => {
 app.use(cors());
 
 app.get('/api/v1/posts', function (req, res) {
+  let limitedPosts = posts;
+  const page = req.query.page;
+  if (typeof(page) != undefined && !isNaN(page)) {
+    limitedPosts = _.chunk(posts, 2)[page];
+  }
   res.json({
     meta: {},
-    data: posts
+    data: limitedPosts
   });
 });
 
