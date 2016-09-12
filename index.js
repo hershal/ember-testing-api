@@ -7,7 +7,7 @@ const faker = require('faker');
 const posts = _.map(_.range(10), (idx) => {
   return {
     id: `${idx}`,
-    type: "post",
+    type: "blog-post",
     attributes: {
       title: faker.lorem.words(),
       author: faker.fake('{{name.firstName}} {{name.lastName}}'),
@@ -19,7 +19,7 @@ const posts = _.map(_.range(10), (idx) => {
 
 app.use(cors());
 
-app.get('/api/v1/posts', function (req, res) {
+app.get('/api/v1/blog-posts', function (req, res) {
   let limitedPosts = posts;
   const page = req.query.page;
   if (typeof(page) != undefined && !isNaN(page)) {
